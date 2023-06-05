@@ -256,10 +256,10 @@ class Distribution_func:
 
 
 class Average_GradientDescent:
-    def __init__(self, n_count_qubits, r, trainable_block_layers, n_param, L):
+    def __init__(self, n_count_qubits, r, entangling_block_layers, n_param, L):
         self.n_count_qubits = n_count_qubits
         self.r = r
-        self.trainable_block_layers = trainable_block_layers
+        self.entangling_block_layers = entangling_block_layers
         self.n_param = n_param
 
         self.delta = L / (2 ** n_count_qubits)
@@ -268,7 +268,7 @@ class Average_GradientDescent:
         self.offset = L/2 - (1 / (2 ** (n_count_qubits+1)))
 
         self.weights = 2 * np.pi * np.random.random(
-        size=(r + 1, trainable_block_layers, n_param, 3),
+        size=(r + 1, entangling_block_layers, n_param, 3),
         requires_grad=True)
 
         self.dev1 = qml.device('default.qubit', wires=n_param + 1 + n_count_qubits * n_param)

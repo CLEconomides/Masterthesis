@@ -9,10 +9,25 @@ import utils
 import operator
 from sklearn.decomposition import PCA
 from sklearn.manifold import TSNE
+import pickle
 
 
+class Average_GradientDescent_file_opener:
+    def __init__(self, file_path):
+        self.file_path = file_path
+        with open(os.path.join(file_path,"info.pkl"), 'rb') as file:
+            info_dict = pickle.load(file)
 
-class File_opener:
+        self.rep = info_dict["rep"]
+        {"rep": rep,
+         "l": l,
+         "n_q": n_q,
+         "r": r,
+         "entangling_block_layers": entangling_block_layers,
+         "n_param": n_param,
+         "seed": seed,
+         "lr": lr}
+class Distribution_func_file_opener:
     def __init__(self, n, n_loss_param, seed, rr, sing, zero_param, Hadamard_index, lr, superpos_hyperparameter, trl, name=None, save_directory=None):
         self.n = n
         self.n_loss_param = n_loss_param
@@ -370,7 +385,7 @@ for jj, filepath in enumerate([x for x in os.walk(from_directory)][0][1]):
     # print(f"filepath={filepath}")
     print(f"total_path = {os.path.join(dir,filepath)}")
 
-    instance = File_opener(5, 3, 2, 5, True, True, True, 0.05, 0.0, 4, name=r"C:\Users\Constantin\Desktop\results5\results5\5_3_1_5_ST_ZT_HT_lr0.05_h0.95_trl8", save_directory=result_directory)
+    instance = Distribution_func_file_opener(5, 3, 2, 5, True, True, True, 0.05, 0.0, 4, name=r"C:\Users\Constantin\Desktop\results5\results5\5_3_1_5_ST_ZT_HT_lr0.05_h0.95_trl8", save_directory=result_directory)
     print(f"N_q:{instance.n}, N_loss: {instance.n_loss_param}, seed: {instance.seed}, r: {instance.rr}")
     instance.DimRed_of_iteration(DimRed_type=red_type)
     exit("finished after one iteration PCA")
@@ -441,7 +456,7 @@ for key, value in var_dict.items():
 
 exit()
 
-test_instance = File_opener(5,3,2,5, 'T', 'T', 'T',0.05, 0.0, 4, save_directory=result_directory)
+test_instance = Distribution_func_file_opener(5, 3, 2, 5, 'T', 'T', 'T', 0.05, 0.0, 4, save_directory=result_directory)
 # print(test_instance.maximum_string(test_instance.count_list[138]))
 # print(max(test_instance.count_list[0], test_instance.count_list[0].get))
 exit()
@@ -464,8 +479,8 @@ filepath = r'C:\Users\Constantin\PycharmProjects\MasterArbeit\results2'
 file_specific_path = '4_2_2_7_ST_ZT_HT_lr0.05_h0.0_trl8'
 filepath = os.path.join(filepath, file_specific_path)
 print(filepath)
-instance1 = File_opener(1, 1, 1, 1, 'T', 'T', 'T',
-                                            1, 1, 1, filepath)
+instance1 = Distribution_func_file_opener(1, 1, 1, 1, 'T', 'T', 'T',
+                                          1, 1, 1, filepath)
 
 df_results = np.zeros(shape=(2 ** instance1.n, 2 ** instance1.n))
 
@@ -491,8 +506,8 @@ for seed in seeds:
                     file_specific_path = str(6) + '_' + str(2) + '_' + str(seed) + '_' + str(r_) + '_' + 'S' + 'T' + '_' + 'Z' + 'T' + '_' + 'H' + 'T' + '_' + 'lr' + str(float(lr)) + '_' + 'h' + str(h_) + '_' + 'trl' + str(trl_)
                     filepath = os.path.join(filepath, file_specific_path)
                     print(filepath)
-                    instance1 = File_opener(1, 1, 1, 1, 'T', 'T', 'T',
-                                            1, 1, 1, filepath)
+                    instance1 = Distribution_func_file_opener(1, 1, 1, 1, 'T', 'T', 'T',
+                                                              1, 1, 1, filepath)
 
                     df_results = np.zeros(shape=(2 ** instance1.n, 2 ** instance1.n))
 
@@ -538,8 +553,8 @@ for file_n in file_names[1:]:
     # print(h,lr,rr,seed, n_loss_p, n_c6)
 
     print(f"file {file_names.index(file_n)}, {file_names.index(file_n)/len(file_names)}% done ")
-    instance1 = File_opener(1, 1, 1, 1, 'T', 'T', 'T',
-                            1, 1, 1, file_n)
+    instance1 = Distribution_func_file_opener(1, 1, 1, 1, 'T', 'T', 'T',
+                                              1, 1, 1, file_n)
 
     #find best evaluation by the standard gradient descent
     gd_eval_list = [gd_cost_list[-1] for gd_cost_list in instance1.gd_cost_list]
@@ -596,8 +611,8 @@ i=0
 for file_n in file_names[1:]:
     i+=1
     print('file_n', file_n)
-    instance1 = File_opener(1, 1, 1, 1, 'T', 'T', 'T',
-                            1, 1, 1, file_n)
+    instance1 = Distribution_func_file_opener(1, 1, 1, 1, 'T', 'T', 'T',
+                                              1, 1, 1, file_n)
 
     plt.title(file_n[len(file_names[0]):])
     plt.plot([i for i in range(len(instance1.df_cost))],
@@ -617,8 +632,8 @@ for nnn in [3,4,5,6,7,8,9,12,15]:
                             print(nnn)
                             if nnn == 8 or nnn == 10 or nnn == 12 or nnn==6:
                                 continue
-                            instance1 = File_opener(nnn, n_loss_par, seed, rr, 'T', 'T', 'T',
-                                                    lr_, h_, trl_)
+                            instance1 = Distribution_func_file_opener(nnn, n_loss_par, seed, rr, 'T', 'T', 'T',
+                                                                      lr_, h_, trl_)
 
                             plt.title(f'n={nnn} ,n_loss_par={n_loss_par},r={rr} ,lr={lr_} ,trl={trl_} ,H={h_} ,seed={seed}')
                             plt.plot([i for i in range(len(instance1.df_cost))],
