@@ -6,13 +6,13 @@
 #SBATCH --ntasks=1                           # Run on a multi CPU
 #SBATCH --mem=4gb                            # Job memory request
 #SBATCH --time=100:59:00                      # Time limit hrs:min:sec
-#SBATCH --partition=All
-#SBATCH --output=avrg_GD_1.log                 # Standard output and error log
+#SBATCH --partition=NvidiaAll
+#SBATCH --output=avrg_GD_5.log                 # Standard output and error log
 pwd; hostname; date
 echo "running"
 
 # n_count_qubits, r, entangling_block_layers, n_param, seed, L*0.01
-python3 ../main_cip_avrg_GD.py 8 8 4 2 13 8
+python3 ../main_cip_avrg_GD.py 8 8 4 2 15 8
 
 
 

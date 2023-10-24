@@ -11,7 +11,8 @@
 pwd; hostname; date
 echo "running"
 
-python3 ./main_cip1.py [3,4,5,6,7,8,9] [1,4,8] [0.05,0.2] [0,0.95] 4 2 5 7
+# n_qbts, training_lengths, lrs, hyperparameters, seed, n_loss_param, rr, job
+python3 ../main_cip1.py [3,4,5,6,7,8] [1,4,8] [0.05,0.2] [0,0.95] 6 2 5 7
 
 
 echo "all scripts executed"

@@ -11,7 +11,8 @@
 pwd; hostname; date
 echo "running"
 
-python3 ./main_cip1.py [2,3,4] [1,4,8] [0.05,0.2] [0.95] 4 4 5 15
+# n_qbts, training_lengths, lrs, hyperparameters, seed, n_loss_param, rr, job
+python3 ../main_cip1.py [2,3,4] [1,4,8] [0.05,0.2] [0.95] 4 4 5 15
 
 
 

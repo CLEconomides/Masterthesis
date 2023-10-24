@@ -4,7 +4,6 @@ import pennylane as qml
 def string_inverter(string):
     return string[::-1]
 
-
 def filename(n, n_loss_param, seed, rr, sing, zero_param, Hadamard_index, lr, superpos_hyperparameter, trl):
     return f"{n}_{n_loss_param}_{seed}_{rr}_S{str(sing)[0]}_Z{str(zero_param)[0]}_H{str(Hadamard_index)[0]}_lr{lr}_h{superpos_hyperparameter}_trl{trl}"
     # return str(n) + '_' + str(n_loss_param) + '_' + str(

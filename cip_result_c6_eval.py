@@ -19,14 +19,14 @@ class Average_GradientDescent_file_opener:
             info_dict = pickle.load(file)
 
         self.rep = info_dict["rep"]
-        {"rep": rep,
-         "l": l,
-         "n_q": n_q,
-         "r": r,
-         "entangling_block_layers": entangling_block_layers,
-         "n_param": n_param,
-         "seed": seed,
-         "lr": lr}
+        # {"rep": rep,
+        #  "l": l,
+        #  "n_q": n_q,
+        #  "r": r,
+        #  "entangling_block_layers": entangling_block_layers,
+        #  "n_param": n_param,
+        #  "seed": seed,
+        #  "lr": lr}
 class Distribution_func_file_opener:
     def __init__(self, n, n_loss_param, seed, rr, sing, zero_param, Hadamard_index, lr, superpos_hyperparameter, trl, name=None, save_directory=None):
         self.n = n

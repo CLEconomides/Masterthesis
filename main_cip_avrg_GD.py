@@ -3,13 +3,12 @@ from pennylane import numpy as np
 import pennylane as qml
 import os
 import sys
-import multiprocessing
 from multiprocessing import Process
 import pickle
 
 "Learning parameters"
-repetitions = 2
-iterations = 250
+repetitions = 10
+iterations = 2
 _lr = 0.02
 def run_experiment(rep, l, n_q, r, lr,
                    entangling_block_layers, n_param,
@@ -24,6 +23,7 @@ def run_experiment(rep, l, n_q, r, lr,
     filepath = os.path.join(folder_path, f"rep{rep}_l{l}")
     pickle_file = os.path.join(filepath, 'finish_status.pkl')
     info_file = os.path.join(filepath, "info.pkl")
+
     #continue unfinished experiment
     if os.path.exists(filepath):
         with open(pickle_file, 'rb') as file:
@@ -69,6 +69,7 @@ def run_experiment(rep, l, n_q, r, lr,
                      "seed": seed,
                      "lr": lr,
                      "Iteration": 0}
+
         with open(info_file, 'wb') as file:
             pickle.dump(info_dict, file)
 
@@ -79,7 +80,7 @@ def run_experiment(rep, l, n_q, r, lr,
         normal_cost_list = []
 
         average_params_list = []
-        # cost of the averge
+        # cost of the average
         average_cost_list = []
         # cost of the point that average params lead to
         average_point_cost_list = []
@@ -90,7 +91,7 @@ def run_experiment(rep, l, n_q, r, lr,
 
     class_instance = Average_GradientDescent(n_count_qubits=n_q, r=r,
                                              entangling_block_layers=entangling_block_layers,
-                                             n_param=n_param, L=l)
+                                             n_param=n_param, L=l, seed=seed)
 
 
     start_it = info_dict["Iteration"]
@@ -99,7 +100,6 @@ def run_experiment(rep, l, n_q, r, lr,
         normal_params_list.append(normal_params)
         normal_params, normal_cost = opt0.step_and_cost(class_instance.quantum_function,
                                                         normal_params)
-
         normal_cost_list.append(normal_cost)
 
         average_params_list.append(average_params)
@@ -169,7 +169,7 @@ if __name__ == "__main__":
         os.mkdir(_folder_path)
 
     np.random.seed(_seed)
-    "Circuit parameters/Set-up - on Laptop"
+    "Circuit parameters/Set-up - on local device"
     # n_count_qubits = 5
     # _r = 6
     # _entangling_block_layers = 3

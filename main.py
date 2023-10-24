@@ -33,11 +33,13 @@ sing = True
 zero_param = True
 Hadamard_index = True
 
-inst2 = Distribution_func(counting_qubits=n_qbts[0], qf_qubits=n_loss_param,
-                                  training_length=training_lengths[0], r=rr, seed=seed,
-                                  n_loss_param=n_loss_param,
-                                  Hadamard_index=Hadamard_index,
-                                  superpos_hyperparameter=hyperparameters[0])
+inst2 = Distribution_func(counting_qubits=n_qbts[0],
+                          qf_qubits=n_loss_param,
+                          training_length=training_lengths[0],
+                          r=rr, seed=seed,
+                          n_loss_param=n_loss_param,
+                          Hadamard_index=Hadamard_index,
+                          superpos_hyperparameter=hyperparameters[0])
 
 # count_eval_dict = {}
 # angle_list = []
